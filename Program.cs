@@ -14,8 +14,8 @@ public class Program
     [DllImport("user32.dll", SetLastError = true)]
     public static extern bool CloseClipboard();
 
-    private void DateInputError()
-	{
+    private static void DateInputError()
+    {
         Console.WriteLine("Некорректный формат даты. Пожалуйста, введите дату в указанном формате.");
 	}
 
@@ -43,8 +43,8 @@ public class Program
                 isValidInput = DateTimeOffset.TryParseExact(inputDateStart, formats, provider, DateTimeStyles.None, out dto);
 
                 if (!isValidInput)
-                {
-                    Console.WriteLine("Некорректный формат даты. Пожалуйста, введите дату в указанном формате.");
+				{ 
+                    Program.DateInputError();
                 }
 
             } while (!isValidInput);
@@ -60,9 +60,9 @@ public class Program
 
                 isValidInput = DateTimeOffset.TryParseExact(inputDateFinish, formats, provider, DateTimeStyles.None, out dto);
 
-                if (!isValidInput)
+                if (!isValidInput) 
                 {
-                    Console.WriteLine("Некорректный формат даты. Пожалуйста, введите дату в указанном формате.");
+                    Program.DateInputError();
                 }
 
             } while (!isValidInput);
